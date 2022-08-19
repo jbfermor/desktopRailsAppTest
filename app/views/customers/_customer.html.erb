@@ -1,0 +1,29 @@
+<div id="<%= dom_id customer %>">
+  <p>
+    <strong>Name:</strong>
+    <%= customer.name %>
+  </p>
+
+  <p>
+    <strong>Email:</strong>
+    <%= customer.email %>
+  </p>
+
+  <div>
+    <div>
+      <h2>Retailers</h2>
+      <%= link_to "New Retailer", new_customer_retailer_path(@customer) %>
+    </div>
+    <%= render "retailers/table_index" %>
+  </div>
+
+  <div>
+    <div>
+      <h2>Shops</h2>
+      <%= link_to "New Shop", new_customer_shop_path(@customer) %>
+    </div>
+    
+    <%= render "shops/table_index" %>
+  </div>
+  
+</div>
