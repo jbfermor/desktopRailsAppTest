@@ -8,12 +8,12 @@ class CustomersController < ApplicationController
 
   # GET /customers/1 or /customers/1.json
   def show
-    @customer.getOpenFile
     @retailers = @customer.retailers
     @shops = []
     Shop.all.each do |shop|
       @shops << shop if retailers.include?(shop.retailer)
     end
+    @reports = @customer.reports
   end
 
   # GET /customers/new
@@ -73,4 +73,5 @@ class CustomersController < ApplicationController
     def customer_params
       params.require(:customer).permit(:name, :email)
     end
+
 end

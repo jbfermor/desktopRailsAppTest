@@ -1,0 +1,39 @@
+<div id="<%= dom_id report %>">
+  <p>
+    <strong>Name:</strong>
+    <%= report.name %>
+  </p>
+
+  <p>
+    <strong>Columns:</strong>
+    <div class= "d-flex flex-wrap">
+      <% @columns.each do |column| %>
+        <%= link_to column.name, column_activate_path(column),
+        class: column.active == true ? "btn btn-primary mx-1" : "btn btn-secondary" %>
+      <% end %>
+    </div>
+  </p>
+
+  <p>
+    <strong>Filter:</strong>
+    <%= report.filter %>
+    <%= render "reports/filter_select" %>  </p>
+
+  <p>
+    <strong>Path:</strong>
+    <%= report.path %>
+  </p>
+
+  <p>
+    <strong>Preview:</strong>
+    <strong><%= "#{@report.printers.length} elements" %></strong>
+    <div class= "d-flex flex-wrap">
+      <% @printers.each do |printer| %>
+        <%= link_to printer.name, printer_activate_path(printer),
+        class: printer.active == true ? "btn btn-primary mx-1" : "btn btn-secondary" %>
+      <% end %>
+    </div>
+  </p>
+
+</div>
+

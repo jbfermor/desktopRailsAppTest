@@ -25,5 +25,14 @@
     
     <%= render "shops/table_index" %>
   </div>
+
+  <div>
+    <div>
+      <h2>Reports</h2>
+      <%= link_to "New Report", new_customer_report_path(@customer) %>
+    </div>
+    
+    <%= render "reports/table_index" %>
+  </div>
   
 </div>

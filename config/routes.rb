@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
-  get 'manual/index'
-
+  get "column/:id", to: "columns#activate", as: :column_activate
+  get "printer/:id", to: "printers#activate", as: :printer_activate
+  patch "report/:id", to: "reports#update_filter", as: :report_update_filter
   resources :customers, shallow: true do
     resources :retailers
     resources :shops
+    resources :reports
+
   end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

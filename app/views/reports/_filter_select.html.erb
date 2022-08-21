@@ -1,0 +1,21 @@
+<%= form_with(model: @report, url: report_update_filter_path, method: :patch) do |form| %>
+  <% if @report.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@report.errors.count, "error") %> prohibited this report from being saved:</h2>
+      <ul>
+        <% @report.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :filter, style: "display: block" %>
+    <%= form.collection_select :filter, @fields, :id, :name %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
