@@ -14,6 +14,7 @@ class CustomersController < ApplicationController
       @shops << shop if retailers.include?(shop.retailer)
     end
     @reports = @customer.reports
+
   end
 
   # GET /customers/new

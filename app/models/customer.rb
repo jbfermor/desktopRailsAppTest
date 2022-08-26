@@ -1,9 +1,6 @@
 class Customer < ApplicationRecord
 
-  has_many :retailers
-  has_many :reports
-
-  path = ""
-
+  has_many :retailers, dependent: :destroy
+  has_many :reports, dependent: :destroy
 
 end

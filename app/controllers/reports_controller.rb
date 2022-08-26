@@ -1,7 +1,5 @@
 class ReportsController < ApplicationController
-  before_action :set_report, only: %i[ show edit update destroy get_path get_index update_filter ]
-  before_action :get_path, only: %i[ show ]
-
+  before_action :set_report, except: %i[ index new create ]
 
   # GET /reports or /reports.json
   def index
@@ -60,6 +58,17 @@ class ReportsController < ApplicationController
     redirect_to @report
   end
 
+  def report_create
+    report_path = report_params[:report_path]
+    @report.update(report_path: report_path)
+    redirect_to @report
+  end
+
+  def print_report
+    @printers = @report.printers.where(active: true)
+    
+  end
+
   # DELETE /reports/1 or /reports/1.json
   def destroy
     @report.destroy
@@ -68,6 +77,13 @@ class ReportsController < ApplicationController
       format.html { redirect_to @report.customer, notice: "Report was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def select_all_printers
+    @report.printers.each do |printer|
+      printer.update(active: true)
+    end
+    redirect_to @report
   end
 
   private
@@ -83,16 +99,20 @@ class ReportsController < ApplicationController
 
     def get_path
       if @report.path.blank?
-        require 'dialog_box'
-        path = DIALOG_BOX.get_file_dialog
-        @report.update(path: path)
+        path = `python ./public/get_file_path.py`
+        path_to_string(path)
+        @report.update(report_path: path_to_string(path))
       end
     end
 
     def get_index(index)
-      puts index
       @report = Report.find(params[:id])
-      
+    end
+
+    def path_to_string(path)
+      start = path.index("'") + 1
+      final = path.index(".xlsx") + 4
+      path[start..final]
     end
 
 end

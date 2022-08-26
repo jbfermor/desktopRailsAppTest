@@ -2,8 +2,8 @@ class ColumnsController < ApplicationController
   before_action :set_column
 
   def activate
-    toggle = @column.toggle :active
-    @column.update(active: toggle)
+    @column.toggle :active
+    @column.save
     redirect_to @column.report
   end
 

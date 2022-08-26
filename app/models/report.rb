@@ -3,9 +3,10 @@ class Report < ApplicationRecord
   has_many :columns, dependent: :destroy
   has_many :printers, dependent: :destroy
 
+
   def get_data
-    if self.path && self.columns.empty?
-      doc = SimpleXlsxReader.open(self.path)
+    if self.report_path && self.columns.empty?
+      doc = SimpleXlsxReader.open(self.report_path)
       doc.sheets.first.rows.first.each do |column|
         Column.create(name: column, report_id: self.id, active: true)
       end
@@ -14,12 +15,12 @@ class Report < ApplicationRecord
 
   def get_filtered_data(filter)
     delete_printers
-    doc = SimpleXlsxReader.open(self.path)
+    doc = SimpleXlsxReader.open(self.report_path)
     data = doc.sheets.first.rows
     data.each do |row|  
-      Printer.create(name: row[filter.to_i], report_id: self.id, active: true)   
+      Printer.create(name: row[filter.to_i], report_id: self.id, active: false)   
     end
-    puts self.printers.order(:id).first.delete
+    self.printers.order(:id).first.delete
   end
 
   def delete_printers
