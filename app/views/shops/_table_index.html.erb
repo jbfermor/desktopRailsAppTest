@@ -9,9 +9,9 @@
   <tbody>
     <% @shops.each do |shop| %>
       <tr>
-        <td><%= shop.name %></td>
+        <td><%= link_to shop.name, shop %></td>
         <td><%= shop.email %></td>
-        <td><%= shop.retailer %></td>
+        <td><%= shop.retailer.name %></td>
       </tr>
     <% end %>
   </tbody>

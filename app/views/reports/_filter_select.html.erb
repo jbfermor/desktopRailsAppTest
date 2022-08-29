@@ -12,7 +12,7 @@
 
   <div>
     <%= form.label :filter, style: "display: block" %>
-    <%= form.collection_select :filter, @fields, :id, :name %>
+    <%= form.collection_select :filter, @fields, :id, :name, { :selected => @report.columns.order(:id)[@report.filter.to_i].id } %>
   </div>
 
   <div>

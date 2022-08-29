@@ -1,0 +1,20 @@
+<div>
+  <h2>The shops receiving the reports are:</h2>
+  <ul>
+    <% @active_printers.each do |ap| %>
+      <li><%= "#{ap.name} on #{ap.report_path}" %></li>
+    <% end %>
+  </ul>
+  <%= form_with url: final_sending_path do |f| %>
+    <div>
+      <h2>Please, select the account from they are going to be sent:</h2>
+      <%= f.select "accounts", options_for_select(@accounts) %>
+    </div>
+    <div>
+      <%= f.label :body, "Body" %>
+      <%= f.rich_text_area :body %>
+    </div>
+
+    <%= f.submit %>
+  <% end %>
+</div>

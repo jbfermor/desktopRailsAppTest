@@ -20,7 +20,7 @@
   <div>
     <div>
       <h2>Shops</h2>
-      <%= link_to "New Shop", new_customer_shop_path(@customer) %>
+      <%= link_to "New Shop", new_shop_path(customer_id: @customer) %>
     </div>
     
     <%= render "shops/table_index" %>

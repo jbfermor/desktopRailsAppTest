@@ -1,10 +1,10 @@
 <h1>Editing shop</h1>
 
-<%= render "form", shop: @shop %>
+<%= render "edit_form", shop: @shop %>
 
 <br>
 
 <div>
   <%= link_to "Show this shop", @shop %> |
-  <%= link_to "Back to shops", shops_path %>
+  <%= link_to "Back to #{@shop.retailer.customer}", @shop.retailer.customer %>
 </div>

@@ -11,7 +11,7 @@ class CustomersController < ApplicationController
     @retailers = @customer.retailers
     @shops = []
     Shop.all.each do |shop|
-      @shops << shop if retailers.include?(shop.retailer)
+      @shops << shop if @retailers.include?(shop.retailer)
     end
     @reports = @customer.reports
 

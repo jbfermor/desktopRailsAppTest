@@ -18,6 +18,7 @@ class ShopsController < ApplicationController
 
   # GET /shops/1/edit
   def edit
+    @retailers = @shop.retailer.customer.retailers
   end
 
   # POST /shops or /shops.json
@@ -53,7 +54,7 @@ class ShopsController < ApplicationController
     @shop.destroy
 
     respond_to do |format|
-      format.html { redirect_to shops_url, notice: "Shop was successfully destroyed." }
+      format.html { redirect_to @shop.retailer.customer, notice: "Shop was successfully destroyed." }
       format.json { head :no_content }
     end
   end
