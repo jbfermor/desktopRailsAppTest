@@ -1,26 +1,28 @@
 <div class="m-2 p-3">
-  <%= form_with(model: @report, url: report_update_filter_path, method: :patch) do |form| %>
-  <% if @report.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(@report.errors.count, "error") %> prohibited this report from being saved:</h2>
-      <ul>
-        <% @report.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+  <div class="m-2">
+    <h4>Current filter: <%= @report.filter.present? ? @report.columns[@report.filter.to_i]: "Not chosen yet" %></h4>
+  </div>
+  <div class="m-2 p-3">
+    <%= form_with(model: @report, url: report_update_filter_path, method: :patch) do |form| %>
+    <% if @report.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(@report.errors.count, "error") %> prohibited this report from being saved:</h2>
+        <ul>
+          <% @report.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %> 
+    <div class="m-2">
+      <%= form.label :filter, class: "form-label" %>
+      <%= form.collection_select :filter, @fields, :id, :name, 
+      class: "form-select" %>
     </div>
-  <% end %>
-
-  <div>
-    <%= form.label :filter, class: "form-label" %>
-    <%= form.collection_select :filter, @fields, :id, :name, 
-    { :selected => @report.columns.order(:id)[@report.filter.to_i].id },
-    class: "form-select" %>
+    <div class="row m-2">
+      <%= form.submit "Filter processing...", class: "btn btn-warning mt-3" %>
+    </div>
+    <% end %>
   </div>
-
-  <div class="row">
-    <%= form.submit "Filter processing...", class: "btn btn-warning mt-3" %>
-  </div>
-  <% end %>
 </div>
 

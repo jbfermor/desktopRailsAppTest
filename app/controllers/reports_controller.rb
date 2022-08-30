@@ -8,9 +8,10 @@ class ReportsController < ApplicationController
 
   # GET /reports/1 or /reports/1.json
   def show
-    if @report.report_path.empty?
+    if @report.report_path == "NotChosen"
       redirect_to customer_path(@report.customer), notice: "File not chosen"
     else
+      
       @file_name = @report.report_path.split('/').last
       @columns = @report.columns.order(:id)
       @fields = @columns.where active: true
@@ -36,8 +37,10 @@ class ReportsController < ApplicationController
     if @report.report_path == "NotChosen"
       redirect_to customer_path(@report.customer), notice: "File not chosen"
     else
+      
       respond_to do |format|
         if @report.save
+          @report.get_data
           format.html { redirect_to @report}
           format.json { render :show, status: :created, location: @report }
         else

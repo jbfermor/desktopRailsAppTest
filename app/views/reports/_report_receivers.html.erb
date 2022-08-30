@@ -1,3 +1,4 @@
+<% if @report.filter.present? %>
 <div class="m-2 p-3">
   <h2><%= @report.columns.order(:id)[@report.filter.to_i].name %></h2>
   <strong><%= "#{@report.printers.length} elements" %></strong>
@@ -13,3 +14,4 @@
     <% end %>
   </div>
 </div>
+<% end %>

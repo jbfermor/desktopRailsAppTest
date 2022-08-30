@@ -41,15 +41,16 @@
     <%= render "reports/report_receivers" %>
   </div>
 
-  <div class="row m-2 p-3 shadow">
-    <div class="row m-2">
-      <%= link_to "Save reports", print_report_path(@report), class: "btn btn-success" %>
+  <% if @report.filter.present? %>
+    <div class="row m-2 p-3 shadow">
+      <div class="row m-2">
+        <%= link_to "Save reports", print_report_path(@report), class: "btn btn-success" %>
+      </div>
+      <div class="row m-2">
+        <%= link_to "Save reports and send to mail", print_send_report_path(@report), class: "btn btn-primary" %>
+      </div>
     </div>
-    <div class="row m-2">
-      <%= link_to "Save reports and send to mail", print_send_report_path(@report), class: "btn btn-primary" %>
-    </div>
-  </div>
-
+  <% end %>
 
 </div>
 
