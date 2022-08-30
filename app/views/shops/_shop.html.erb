@@ -1,17 +1,52 @@
-<div id="<%= dom_id shop %>">
-  <p>
-    <strong>Name:</strong>
-    <%= shop.name %>
-  </p>
+  <div class="m-2 p-3 shadow">
+    <div class="d-flex justify-content-between">
+      <h1><%= shop.name %></h1>
+      <div class="btn-group">
+        <div>
+          <%= link_to "Edit", edit_shop_path(@shop), class: "btn btn-warning btn-sm" %>
+        </div>
+        <div>
+          <%= link_to "Destroy", @shop, method: :delete, class: "btn btn-danger btn-sm" %>
+        </div>
+      </div>
+    </div>
+    <div class="card p-3 m2">
+      <%= shop.email %>
+    </div>
+  </div>
+ 
+  <div class="m-2 p-3 shadow">
+    <div class="d-flex justify-content-between">
+      <h2>Retailers</h2>
+      <div>
+        <%= link_to "New Retailer", new_shop_retailer_path(@shop), class: "btn btn-success btn-sm" %>
+      </div>
+    </div>
+    <div>
+      <%= render "retailers/table_index" %>
+    </div>
+  </div>
 
-  <p>
-    <strong>Email:</strong>
-    <%= shop.email %>
-  </p>
+  <div class="m-2 p-3 shadow">
+    <div class="d-flex justify-content-between">
+      <h2>Shops</h2>
+      <div>
+        <%= link_to "New Shop", new_shop_path(shop_id: @shop), class: "btn btn-success btn-sm" %>
+      </div>
+    </div>
+    <div>
+      <%= render "shops/table_index" %>
+    </div>
+  </div>
 
-  <p>
-    <strong>Retailer:</strong>
-    <%= shop.retailer_id %>
-  </p>
-
-</div>
+  <div class="m-2 p-3 shadow">
+    <div class="d-flex justify-content-between">
+      <h2>Reports</h2>
+      <div>
+        <%= link_to "New Report", new_shop_report_path(@shop), class: "btn btn-success btn-sm" %>
+      </div>
+    </div>
+    <div>
+      <%= render "reports/table_index" %>
+    </div>
+  </div>

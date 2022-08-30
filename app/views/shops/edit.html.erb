@@ -1,10 +1,15 @@
-<h1>Editing shop</h1>
-
-<%= render "edit_form", shop: @shop %>
-
-<br>
-
-<div>
-  <%= link_to "Show this shop", @shop %> |
-  <%= link_to "Back to #{@shop.retailer.customer}", @shop.retailer.customer %>
+<div class="row shadow m-2 p-3">
+  <div class="row m-2">
+    <h1>Editing <%= @shop.name %></h1>
+  </div>
+  <div class="row m-2">
+    <%= render "form", shop: @shop %>
+  </div>
+  <div class="row m-2">
+    <%= link_to "Show this shop", @shop, class: "btn btn-primary" %> 
+  </div>
+  <div class="row m-2">
+    <%= link_to "Back to customer", customer_path(@shop.retailer.customer), class: "btn btn-dark" %>
+  </div>
 </div>
+

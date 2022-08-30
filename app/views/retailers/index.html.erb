@@ -1,14 +1,16 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Retailers</h1>
-
-<div id="retailers">
-  <% @retailers.each do |retailer| %>
-    <%= render retailer %>
-    <p>
-      <%= link_to "Show this retailer", retailer %>
-    </p>
-  <% end %>
+<div class="row">
+    <p style="color: green"><%= notice %></p>
+</div>
+<div class="row shadow m2 p-3">
+    <div class="row">
+        <h1>retailers</h1>
+        <div id="retailers">
+            <%= render "retailers/table_index" %>
+        </div>
+    </div>   
+    <div class="row">
+        <%= link_to "New retailer", new_retailer_path, class: "btn btn-success" %>
+    </div>
 </div>
 
-<%= link_to "New retailer", new_retailer_path %>
+

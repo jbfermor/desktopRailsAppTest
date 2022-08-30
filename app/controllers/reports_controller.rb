@@ -12,6 +12,7 @@ class ReportsController < ApplicationController
     @columns = @report.columns.order(:id)
     @fields = @columns.where active: true
     @printers = @report.printers.order(:id)
+    @file_name = @report.report_path.split('/').last
   end
 
   # GET /reports/new
@@ -92,7 +93,7 @@ class ReportsController < ApplicationController
     printers = @report.printers.where(active: true)
     printers.each do |printer|
       mail = Shop.all.find_by(name: printer.name).email
-      puts `python ./public/send_report.py #{params[:accounts]} "#{mail}" "#{printer.name}" "#{params[:body]}" "#{printer.report_path}"`
+      puts `python ./public/send_report.py #{params[:accounts]} "#{mail}" "#{printer.name}" "#{params[:subject]}" "#{params[:body]}" "#{printer.report_path}"`
     end    
     redirect_to @report
   end
@@ -114,6 +115,11 @@ class ReportsController < ApplicationController
     redirect_to @report
   end
 
+  def update_path
+    get_path
+    redirect_to @report
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_report
@@ -123,14 +129,6 @@ class ReportsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def report_params
       params.require(:report).permit(:name, :filter, :path, :customer_id, column_ids: [])
-    end
-
-    def get_path
-      if @report.path.blank?
-        path = `python ./public/get_file_path.py`
-        path_to_string(path)
-        @report.update(report_path: path_to_string(path))
-      end
     end
 
     def get_folder_path

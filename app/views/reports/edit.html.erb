@@ -1,10 +1,15 @@
-<h1>Editing report</h1>
-
-<%= render "form", report: @report %>
-
-<br>
-
-<div>
-  <%= link_to "Show this report", @report %> |
-  <%= link_to "Back to reports", reports_path %>
+<div class="row shadow m-2 p-3">
+  <div class="row m-2">
+    <h1>Editing <%= @report.name %></h1>
+  </div>
+  <div class="row m-2">
+    <%= render "edit_form", report: @report %>
+  </div>
+  <div class="row m-2">
+    <%= link_to "Show this report", @report, class: "btn btn-primary" %> 
+  </div>
+  <div class="row m-2">
+    <%= link_to "Back to customer", customer_path(@report.customer), class: "btn btn-dark" %>
+  </div>
 </div>
+

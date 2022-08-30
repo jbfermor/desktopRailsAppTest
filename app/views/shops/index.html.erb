@@ -1,14 +1,16 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Shops</h1>
-
-<div id="shops">
-  <% @shops.each do |shop| %>
-    <%= render shop %>
-    <p>
-      <%= link_to "Show this shop", shop %>
-    </p>
-  <% end %>
+<div class="row">
+    <p style="color: green"><%= notice %></p>
+</div>
+<div class="row shadow m2 p-3">
+    <div class="row">
+        <h1>shops</h1>
+        <div id="shops">
+            <%= render "shops/table_index" %>
+        </div>
+    </div>   
+    <div class="row">
+        <%= link_to "New shop", new_shop_path, class: "btn btn-success" %>
+    </div>
 </div>
 
-<%= link_to "New shop", new_shop_path %>
+

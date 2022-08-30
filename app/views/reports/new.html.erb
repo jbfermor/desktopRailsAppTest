@@ -1,9 +1,15 @@
-<h1>New report</h1>
-
-<%= render "form", report: @report %>
-
-<br>
-
-<div>
-  <%= link_to "Back to #{@customer.name}", @customer %>
+<div class="row shadow m-2 p-3">
+  <div class="row m-2">
+    <h1>New report</h1>
+  </div>
+  
+  <div class="row m-2">
+    <%= render "form", report: @report %>
+  </div>
+  
+  <div class="row m-2">
+    <%= link_to "Back to customer", customer_path(@report.customer), class: "btn btn-dark" %>
+  </div>
 </div>
+
+

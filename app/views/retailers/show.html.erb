@@ -1,10 +1,14 @@
-<p style="color: green"><%= notice %></p>
 
-<%= render @retailer %>
-
-<div>
-  <%= link_to "Edit this retailer", edit_retailer_path(@retailer) %> |
-  <%= link_to "Back to #{@retailer.customer.name}", @retailer.customer %>
-
-  <%= button_to "Destroy this retailer", @retailer, method: :delete %>
+  <div class="row m-2 p-3">
+    <p style="color: green"><%= notice %></p>
+  </div>
+  <div class="row shadow m-2 p-3">
+    <div>
+      <%= render @retailer %>
+    </div>
+    <div class="row m-2 p-3">
+      <%= link_to "Back to customer", customer_path(@retailer.customer), class: "btn btn-dark" %>
+    </div>
+  </div>
 </div>
+

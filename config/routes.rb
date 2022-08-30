@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get "report/:id/select_all_printers", to: "reports#select_all_printers", as: :select_all_printers
   get "report/:id/print_report", to: "reports#print_report", as: :print_report
   get "report/:id/print_send_report", to: "reports#print_send_report", as: :print_send_report
+  get "report/:id/update_path", to: "reports#update_path", as: :update_path
   post "report/:id/final_sending", to: "reports#final_sending", as: :final_sending
 
   resources :customers, shallow: true do

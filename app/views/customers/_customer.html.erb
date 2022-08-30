@@ -1,38 +1,52 @@
-<div id="<%= dom_id customer %>">
-  <p>
-    <strong>Name:</strong>
-    <%= customer.name %>
-  </p>
-
-  <p>
-    <strong>Email:</strong>
-    <%= customer.email %>
-  </p>
-
-  <div>
-    <div>
+  <div class="m-2 p-3 shadow">
+    <div class="d-flex justify-content-between">
+      <h1><%= customer.name %></h1>
+      <div class="btn-group">
+        <div>
+          <%= link_to "Edit", edit_customer_path(@customer), class: "btn btn-warning btn-sm" %>
+        </div>
+        <div>
+          <%= link_to "Destroy", @customer, method: :delete, class: "btn btn-danger btn-sm" %>
+        </div>
+      </div>
+    </div>
+    <div class="card p-3 m2">
+      <%= customer.email %>
+    </div>
+  </div>
+ 
+  <div class="m-2 p-3 shadow">
+    <div class="d-flex justify-content-between">
       <h2>Retailers</h2>
-      <%= link_to "New Retailer", new_customer_retailer_path(@customer) %>
+      <div>
+        <%= link_to "New Retailer", new_customer_retailer_path(@customer), class: "btn btn-success btn-sm" %>
+      </div>
     </div>
-    <%= render "retailers/table_index" %>
+    <div>
+      <%= render "retailers/table_index" %>
+    </div>
   </div>
 
-  <div>
-    <div>
+  <div class="m-2 p-3 shadow">
+    <div class="d-flex justify-content-between">
       <h2>Shops</h2>
-      <%= link_to "New Shop", new_shop_path(customer_id: @customer) %>
+      <div>
+        <%= link_to "New Shop", new_shop_path(customer_id: @customer), class: "btn btn-success btn-sm" %>
+      </div>
     </div>
-    
-    <%= render "shops/table_index" %>
+    <div>
+      <%= render "shops/table_index" %>
+    </div>
   </div>
 
-  <div>
-    <div>
+  <div class="m-2 p-3 shadow">
+    <div class="d-flex justify-content-between">
       <h2>Reports</h2>
-      <%= link_to "New Report", new_customer_report_path(@customer) %>
+      <div>
+        <%= link_to "New Report", new_customer_report_path(@customer), class: "btn btn-success btn-sm" %>
+      </div>
     </div>
-    
-    <%= render "reports/table_index" %>
+    <div>
+      <%= render "reports/table_index" %>
+    </div>
   </div>
-  
-</div>

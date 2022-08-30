@@ -1,16 +1,16 @@
-<%= @path %>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @reports.each do |report| %>
+<div class="row m-2 p-3">
+  <table class="table table-striped table-bordered table-hover">
+    <thead class="table-dark">
       <tr>
-        <td><%= link_to report.name, report %></td>
+        <th>Name</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @reports.each do |report| %>
+        <tr>
+          <td><%= link_to report.name, report %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

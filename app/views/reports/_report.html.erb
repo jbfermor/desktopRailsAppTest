@@ -1,41 +1,55 @@
-<div id="<%= dom_id report %>">
-  <p>
-    <strong>Name:</strong>
-    <%= report.name %>
-  </p>
-
-  <p>
-    <strong>Columns:</strong>
-    <div class= "d-flex flex-wrap">
+<div id="<%= dom_id report %>" class="row shadow m-2 p-3">
+  <div class="shadow  m-2 p-3">
+    <div class=" d-flex justify-content-between">
+      <h2><%= report.name %></h2>
+      <div class="btn-group">
+        <div>
+          <%= link_to "Edit", edit_report_path(@report), class: "btn btn-warning btn-sm" %>
+        </div>
+        <div>
+          <%= link_to "Destroy", @report, method: :delete, class: "btn btn-danger btn-sm" %>
+        </div>
+      </div>
+    </div>
+    <div class="card p-2">
+      <div class="card-body">
+        <h5> Current file_path: </h5><%= @file_name %>
+      </div>
+      <div class="card-footer">
+        <%= link_to "Change file...", update_path_path, class: "btn btn-warning" %>
+      </div>
+    </div>
+  </div>
+  
+  <div class="shadow m-2 p-3">
+    <div>
+      <h2>Columns:</h2>
+    </div>
+    <div class= "d-flex flex-wrap justify-content-center">
       <% @columns.each do |column| %>
-        <%= link_to column.name, column_activate_path(column),
-        class: column.active == true ? "btn btn-primary mx-1" : "btn btn-secondary" %>
+          <%= link_to column.name, column_activate_path(column),
+          class: column.active == true ? "btn btn-primary mx-1" : "btn btn-secondary mx-1 my-2 p-1 align-middle" %>
       <% end %>
     </div>
-  </p>
+  </div>
 
-  <p>
-    <strong>Filter:</strong>
-    <%= report.filter %>
-    <%= render "reports/filter_select" %>  </p>
+  <div class="shadow m-2 p-3">
+    <%= render "reports/filter_select" %>
+  </div>
 
-  <p>
-    <strong>Path:</strong>
-    <%= report.report_path %>
-  </p>
-
-  <p>
+  <div class="shadow m-2 p-3">
     <%= render "reports/report_receivers" %>
-  </p>
+  </div>
 
-  <div class="row m2">
-    <div class="btn-group">
-      <%= link_to "Guardar informes", print_report_path(@report), class: "btn btn-success" %>
+  <div class="row m-2 p-3 shadow">
+    <div class="row m-2">
+      <%= link_to "Save reports", print_report_path(@report), class: "btn btn-success" %>
+    </div>
+    <div class="row m-2">
+      <%= link_to "Save reports and send to mail", print_send_report_path(@report), class: "btn btn-primary" %>
     </div>
   </div>
-  <div>
-    <%= link_to "Guardar informes y emitir", print_send_report_path(@report), class: "btn btn-success" %>
-  </div>
+
 
 </div>
 

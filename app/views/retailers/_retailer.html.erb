@@ -1,17 +1,17 @@
-<div id="<%= dom_id retailer %>">
-  <p>
-    <strong>Name:</strong>
-    <%= retailer.name %>
-  </p>
-
-  <p>
-    <strong>Email:</strong>
-    <%= retailer.email %>
-  </p>
-
-  <p>
-    <strong>Customer:</strong>
-    <%= retailer.customer_id %>
-  </p>
-
-</div>
+  <div class="m-2 p-3 shadow">
+    <div class="d-flex justify-content-between">
+      <h1><%= retailer.name %></h1>
+      <div class="btn-group">
+        <div>
+          <%= link_to "Edit", edit_retailer_path(@retailer), class: "btn btn-warning btn-sm" %>
+        </div>
+        <div>
+          <%= link_to "Destroy", @retailer, method: :delete, class: "btn btn-danger btn-sm" %>
+        </div>
+      </div>
+    </div>
+    <div class="card p-3 m2">
+      <%= retailer.email %>
+    </div>
+  </div>
+ 

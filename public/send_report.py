@@ -5,9 +5,9 @@ import datetime
 account = sys.argv[1]
 to = sys.argv[2]
 name = sys.argv[3]
-body = sys.argv[4]
-attachment_path = sys.argv[5]
-month = datetime.datetime.now().strftime("%B")
+subject = sys.argv[4]
+body = sys.argv[5]
+attachment_path = sys.argv[6]
 
 outlook = win32com.client.Dispatch('outlook.application')
 #Create a folder to save REPORTS if dont exists
@@ -22,7 +22,7 @@ for oacc in outlook.Session.Accounts:
 if oacctouse:
     mail._oleobj_.Invoke(*(64209, 0, 8, 0, oacctouse))
 mail.To = to
-mail.Subject = "Sending " + month  + " report: "  + name
+mail.Subject = name + subject
 mail.HTMLBody = body
 mail.Attachments.Add(attachment_path)
 mail.Save()
