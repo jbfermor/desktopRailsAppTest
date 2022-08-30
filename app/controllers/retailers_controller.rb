@@ -53,9 +53,13 @@ class RetailersController < ApplicationController
     @retailer.destroy
 
     respond_to do |format|
-      format.html { redirect_to retailers_url, notice: "Retailer was successfully destroyed." }
+      format.html { redirect_to customer_path(@retailer.customer), notice: "Retailer was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def massive_upload 
+    
   end
 
   private

@@ -8,11 +8,14 @@ class ReportsController < ApplicationController
 
   # GET /reports/1 or /reports/1.json
   def show
-    @report.get_data
-    @columns = @report.columns.order(:id)
-    @fields = @columns.where active: true
-    @printers = @report.printers.order(:id)
-    @file_name = @report.report_path.split('/').last
+    if @report.report_path.empty?
+      redirect_to customer_path(@report.customer), notice: "File not chosen"
+    else
+      @file_name = @report.report_path.split('/').last
+      @columns = @report.columns.order(:id)
+      @fields = @columns.where active: true
+      @printers = @report.printers.order(:id)
+    end
   end
 
   # GET /reports/new
@@ -29,13 +32,18 @@ class ReportsController < ApplicationController
   def create
     @report = Report.new(report_params)
     @report.customer_id = params[:customer_id]
-    respond_to do |format|
-      if @report.save
-        format.html { redirect_to @report}
-        format.json { render :show, status: :created, location: @report }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @report.errors, status: :unprocessable_entity }
+    @report.report_path = path_to_string(`python ./public/get_file_path.py`)
+    if @report.report_path == "NotChosen"
+      redirect_to customer_path(@report.customer), notice: "File not chosen"
+    else
+      respond_to do |format|
+        if @report.save
+          format.html { redirect_to @report}
+          format.json { render :show, status: :created, location: @report }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @report.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -49,6 +57,11 @@ class ReportsController < ApplicationController
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @report.errors, status: :unprocessable_entity }
       end
+  end
+
+  def delete
+    @report.delete
+    redirect_to customer_path(@report.customer)
   end
 
   def update_filter
@@ -116,7 +129,7 @@ class ReportsController < ApplicationController
   end
 
   def update_path
-    get_path
+    @report.update(report_path: path_to_string(`python ./public/get_file_path.py`))
     redirect_to @report
   end
 
@@ -136,9 +149,13 @@ class ReportsController < ApplicationController
     end
 
     def path_to_string(path)
-      start = path.index("'") + 1
-      final = path.index(".xlsx") + 4
-      path[start..final]
+      unless path == "None\n"
+        start = path.index("'") + 1
+        final = path.index(".xlsx") + 4
+        path[start..final]
+      else
+        "NotChosen"
+      end
     end
 
     def make_report(printer, folder_path, data)
