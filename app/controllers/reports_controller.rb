@@ -148,16 +148,6 @@ class ReportsController < ApplicationController
       `python ./public/get_folder_path.py`
     end
 
-    def path_to_string(path)
-      unless path == "None\n"
-        start = path.index("'") + 1
-        final = path.index(".xlsx") + 4
-        path[start..final]
-      else
-        "NotChosen"
-      end
-    end
-
     def make_report(printer, folder_path, data)
       excel_data = []
       headers = []

@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get "report/:id/print_send_report", to: "reports#print_send_report", as: :print_send_report
   get "report/:id/update_path", to: "reports#update_path", as: :update_path
   post "report/:id/final_sending", to: "reports#final_sending", as: :final_sending
+  get "retailer/massive_upload", to: "retailers#massive_upload", as: :retailer_massive_upload
+  get "shop/massive_upload", to: "shops#massive_upload", as: :shop_massive_upload
 
   resources :customers, shallow: true do
     resources :retailers

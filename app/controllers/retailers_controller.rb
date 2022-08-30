@@ -17,6 +17,7 @@ class RetailersController < ApplicationController
 
   # GET /retailers/1/edit
   def edit
+    @customers = Customer.all
   end
 
   # POST /retailers or /retailers.json
@@ -59,7 +60,16 @@ class RetailersController < ApplicationController
   end
 
   def massive_upload 
-    
+    file_path = path_to_string(`python ./public/get_file_path.py`)
+    if file_path != "NotChosen"
+      require 'axlsx'
+      doc = SimpleXlsxReader.open(file_path)
+      data = doc.sheets.first.rows.drop(1)
+      data.each do |row| 
+        Retailer.create(name: row[0], email: row[1], customer_id: params[:customer_id])
+      end
+    end
+    redirect_to customer_path(params[:customer_id])
   end
 
   private

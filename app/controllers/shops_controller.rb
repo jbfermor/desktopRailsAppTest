@@ -49,6 +49,19 @@ class ShopsController < ApplicationController
     end
   end
 
+  def massive_upload 
+    file_path = path_to_string(`python ./public/get_file_path.py`)
+    if file_path != "NotChosen"
+      require 'axlsx'
+      doc = SimpleXlsxReader.open(file_path)
+      data = doc.sheets.first.rows.drop(1)
+      data.each do |row| 
+        Shop.create(name: row[0], email: row[1], retailer_id: Retailer.find_by(name: row[2]).id)
+      end
+    end
+    redirect_to customer_path(params[:customer_id])
+  end
+
   # DELETE /shops/1 or /shops/1.json
   def destroy
     @shop.destroy

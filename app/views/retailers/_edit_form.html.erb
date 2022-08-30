@@ -11,22 +11,22 @@
     </div>
   <% end %>
 
-  <div>
+  <div class="m-2">
     <%= form.label :name, class: "form-label" %>
     <%= form.text_field :name, class: "form-control" %>
   </div>
 
-  <div>
+  <div class="m-2">
     <%= form.label :email, class: "form-label" %>
-    <%= form.text_field :email, class: "form-control %>
+    <%= form.text_field :email, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :retailer_id, class: "form-label" %>
-    <%= form.collection_select :retailer_id, @retailers, :id, :name, class: "form-select %>
+  <div class="m-2">
+    <%= form.label :customer_id, class: "form-label" %>
+    <%= form.collection_select :customer_id, @customers, :id, :name, class: "form-select" %>
   </div>
 
-  <div>
-    <%= form.submit, class: "btn btn-success" %>
+  <div class="m-2">
+    <%= form.submit class: "btn btn-success" %>
   </div>
 <% end %>

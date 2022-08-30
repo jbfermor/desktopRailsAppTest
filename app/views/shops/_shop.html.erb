@@ -14,39 +14,3 @@
       <%= shop.email %>
     </div>
   </div>
- 
-  <div class="m-2 p-3 shadow">
-    <div class="d-flex justify-content-between">
-      <h2>Retailers</h2>
-      <div>
-        <%= link_to "New Retailer", new_shop_retailer_path(@shop), class: "btn btn-success btn-sm" %>
-      </div>
-    </div>
-    <div>
-      <%= render "retailers/table_index" %>
-    </div>
-  </div>
-
-  <div class="m-2 p-3 shadow">
-    <div class="d-flex justify-content-between">
-      <h2>Shops</h2>
-      <div>
-        <%= link_to "New Shop", new_shop_path(shop_id: @shop), class: "btn btn-success btn-sm" %>
-      </div>
-    </div>
-    <div>
-      <%= render "shops/table_index" %>
-    </div>
-  </div>
-
-  <div class="m-2 p-3 shadow">
-    <div class="d-flex justify-content-between">
-      <h2>Reports</h2>
-      <div>
-        <%= link_to "New Report", new_shop_report_path(@shop), class: "btn btn-success btn-sm" %>
-      </div>
-    </div>
-    <div>
-      <%= render "reports/table_index" %>
-    </div>
-  </div>

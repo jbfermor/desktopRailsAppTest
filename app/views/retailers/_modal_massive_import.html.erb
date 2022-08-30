@@ -1,0 +1,21 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#massiveUpload">
+  Massive Upload
+</button>
+<!-- Modal -->
+<div class="modal fade" id="massiveUpload" tabindex="-1" aria-labelledby="massiveUploadLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-red" id="massiveUploadLabel">Warning!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        Excel file must contain 2 columns with the following headers: name : email
+      </div>
+      <div class="modal-footer">
+        <div><%= link_to "Get data from file", retailer_massive_upload_path(customer_id: params[:customer_id]), class: "btn btn-sm btn-success" %></div>
+      </div>
+    </div>
+  </div>
+</div>
