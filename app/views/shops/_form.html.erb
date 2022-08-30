@@ -1,5 +1,5 @@
 <div class="row">
-  <%= form_with(model: shop, url: customer_retailers_path, method: :post) do |form| %>
+  <%= form_with(model: shop, url: customer_shops_path, method: :post) do |form| %>
     <% if shop.errors.any? %>
       <div style="color: red">
         <h2><%= pluralize(shop.errors.count, "error") %> prohibited this shop from being saved:</h2>
