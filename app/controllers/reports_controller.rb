@@ -36,8 +36,7 @@ class ReportsController < ApplicationController
     @report.report_path = path_to_string(`python ./public/get_file_path.py`)
     if @report.report_path == "NotChosen"
       redirect_to customer_path(@report.customer), notice: "File not chosen"
-    else
-      
+    else      
       respond_to do |format|
         if @report.save
           @report.get_data
@@ -87,10 +86,8 @@ class ReportsController < ApplicationController
     data = SimpleXlsxReader.open(@report.report_path)
     folder_path = get_folder_path[0..-2]
     @report.update(path: folder_path)
-    printers.each do |printer|
-      make_report(printer, folder_path, data)
-    end
-    redirect_to @report
+    printers.each { |printer| make_report(printer, folder_path, data) }
+    _to @report
   end
 
   def print_send_report
@@ -100,9 +97,7 @@ class ReportsController < ApplicationController
     data = SimpleXlsxReader.open(@report.report_path)
     folder_path = get_folder_path[0..-2]
     @report.update(path: folder_path)
-    @active_printers.each do |printer|
-      make_report(printer, folder_path, data)
-    end
+    @active_printers.each { |printer| make_report(printer, folder_path, data) }
   end
 
   def final_sending
@@ -125,14 +120,14 @@ class ReportsController < ApplicationController
   end
 
   def select_all_printers
-    @report.printers.each do |printer|
-      printer.update(active: true)
-    end
+    @report.printers.each { |printer| printer.update(active: true) }
     redirect_to @report
   end
 
   def update_path
     @report.update(report_path: path_to_string(`python ./public/get_file_path.py`))
+    @report.columns.each { |column| delete column}
+    @report.get_data
     redirect_to @report
   end
 
