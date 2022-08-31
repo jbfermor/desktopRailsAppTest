@@ -67,7 +67,7 @@ class ReportsController < ApplicationController
   end
 
   def update_filter
-    column = @report.columns.where.order(:id).find(report_params[:filter])
+    column = @report.columns.order(:id).find(report_params[:filter])
     index = @report.columns.order(:id).index(column)
     @report.update(filter: index)
     @report.get_filtered_data(index)
@@ -103,8 +103,12 @@ class ReportsController < ApplicationController
   def final_sending
     printers = @report.printers.where(active: true)
     printers.each do |printer|
-      mail = Shop.all.find_by(name: printer.name).email
-      puts `python ./public/send_report.py #{params[:accounts]} "#{mail}" "#{printer.name}" "#{params[:subject]}" "#{params[:body]}" "#{printer.report_path}"`
+      if Retailer.find_by(name: printer.name)
+        mail = Retailer.find_by(name: printer.name).email if 
+        puts `python ./public/send_report.py #{params[:accounts]} "#{mail}" "#{printer.name}" "#{params[:subject]}" "#{params[:body]}" "#{printer.report_path}"`
+      else
+        flash[:notice] = "#{printer.name} has not a valid Retailer. There are mails not saved. Please, review it"
+      end
     end    
     redirect_to @report
   end
@@ -125,8 +129,8 @@ class ReportsController < ApplicationController
   end
 
   def update_path
-    @report.update(report_path: path_to_string(`python ./public/get_file_path.py`))
-    @report.columns.each { |column| delete column}
+    @report.columns.each { |column| column.delete }
+    @report.update(report_path: path_to_string(`python ./public/get_file_path.py`), filter: "")
     @report.get_data
     redirect_to @report
   end

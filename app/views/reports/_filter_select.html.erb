@@ -1,6 +1,6 @@
 <div class="m-2 p-3">
   <div class="m-2">
-    <h4>Current filter: <%= @report.filter.present? ? @report.columns[@report.filter.to_i]: "Not chosen yet" %></h4>
+    <h4>Current filter: <%= @report.filter.present? ? @report.columns.order(:id)[@report.filter.to_i].name : "Not chosen yet" %></h4>
   </div>
   <div class="m-2 p-3">
     <%= form_with(model: @report, url: report_update_filter_path, method: :patch) do |form| %>
