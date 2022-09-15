@@ -13,7 +13,7 @@
   </div>
   
   <div class="row m-2">
-    <%= link_to "Back to customer", customer_path(params[:customer_id]), class: "btn btn-dark" %>
+    <%= link_to "Back to customer", Customer.find(params[:customer_id]), class: "btn btn-dark" %>
   </div>
 </div>
 
