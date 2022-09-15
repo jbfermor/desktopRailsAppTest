@@ -10,8 +10,11 @@ class CustomersController < ApplicationController
   def show
     @retailers = @customer.retailers
     @shops = []
-    Shop.all.each do |shop|
-      @shops << shop if @retailers.include?(shop.retailer)
+    @retailers.each do |retailer|
+      retailer.shops.each do |shop|
+        puts shop.name
+        @shops << shop
+      end
     end
     @reports = @customer.reports
 

@@ -8,6 +8,7 @@ class RetailersController < ApplicationController
 
   # GET /retailers/1 or /retailers/1.json
   def show
+    @shops = @retailer.shops
   end
 
   # GET /retailers/new
@@ -27,7 +28,7 @@ class RetailersController < ApplicationController
 
     respond_to do |format|
       if @retailer.save
-        format.html { redirect_to retailer_url(@retailer), notice: "Retailer was successfully created." }
+        format.html { redirect_to customer_path(params[:customer_id]), notice: "Retailer was successfully created." }
         format.json { render :show, status: :created, location: @retailer }
       else
         format.html { render :new, status: :unprocessable_entity }

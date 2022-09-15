@@ -64,10 +64,11 @@ class ShopsController < ApplicationController
 
   # DELETE /shops/1 or /shops/1.json
   def destroy
+    customer = @shop.retailer.customer
     @shop.destroy
 
     respond_to do |format|
-      format.html { redirect_to @shop.retailer.customer, notice: "Shop was successfully destroyed." }
+      format.html { redirect_to customer, notice: "Shop was successfully destroyed." }
       format.json { head :no_content }
     end
   end
